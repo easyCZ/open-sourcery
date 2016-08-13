@@ -2,3 +2,8 @@ machine:
   node:
     version: v6.1.0
 
+deployment:
+  firebase:
+    branch: master
+    commands: npm run publish
+
