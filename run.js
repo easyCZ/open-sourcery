@@ -98,11 +98,10 @@ tasks.set('build', () => {
 tasks.set('publish', () => {
   const firebase = require('firebase-tools');
   return run('build')
-    .then(() => firebase.login({ nonInteractive: true }))
+    .then(() => firebase.login({ nonInteractive: false }))
     .then(() => firebase.deploy({
       project: config.project,
-      token: process.env.FIREBASE_TOKEN,
-      cwd: __dirname,
+      cwd: __dirname
     }))
     .then(() => { setTimeout(() => process.exit()); });
 });
