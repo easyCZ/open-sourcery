@@ -101,6 +101,7 @@ tasks.set('publish', () => {
     .then(() => firebase.login({ nonInteractive: false }))
     .then(() => firebase.deploy({
       project: config.project,
+      token: process.env.FIREBASE_TOKEN,
       cwd: __dirname,
     }))
     .then(() => { setTimeout(() => process.exit()); });
