@@ -6,4 +6,5 @@ deployment:
   firebase:
     branch: master
     commands: 
+      - node run build --release
       - ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
