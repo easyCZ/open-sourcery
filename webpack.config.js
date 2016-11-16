@@ -48,6 +48,14 @@ const config = {
     sourcePrefix: '  ',
   },
 
+  resolve: {
+    extensions: ['', '.scss', '.css', '.js', '.json'],
+     modulesDirectories: [
+       'node_modules',
+       path.resolve(__dirname, './node_modules')
+     ]
+  },
+
   // Switch loaders to debug or release mode
   debug: isDebug,
 
@@ -99,7 +107,7 @@ const config = {
         loader: `babel-loader?${JSON.stringify(babelConfig)}`,
       },
       {
-        test: /\.css/,
+        test: /(\.css|\.scss)$/,
         loaders: [
           'style-loader',
           `css-loader?${JSON.stringify({
@@ -110,7 +118,8 @@ const config = {
             // CSS Nano http://cssnano.co/options/
             minimize: !isDebug,
           })}`,
-          'postcss-loader',
+          'sass',
+          // 'postcss-loader',
         ],
       },
       {
@@ -143,6 +152,11 @@ const config = {
         loader: 'file-loader',
       },
     ],
+  },
+
+  sassLoader: {
+    data: '@import "' + path.resolve(__dirname, 'theme/_theme.scss') + '";',
+    includePaths: [path.resolve(__dirname, './src/app')]
   },
 
   // The list of plugins for PostCSS
@@ -187,7 +201,7 @@ const config = {
       require('postcss-selector-not')(),
       // Postcss flexbox bug fixer
       // https://github.com/luisrudge/postcss-flexbugs-fixes
-      require('postcss-flexbugs-fixes')(),      
+      require('postcss-flexbugs-fixes')(),
       // Add vendor prefixes to CSS rules using values from caniuse.com
       // https://github.com/postcss/autoprefixer
       require('autoprefixer')(),

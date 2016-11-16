@@ -19,5 +19,9 @@
   {
     "path": "/tasks/:status(pending|completed)?",
     "page": "./pages/home"
+  },
+  {
+    "path": "/login",
+    "page": "./pages/login"
   }
 ]
