@@ -14,9 +14,9 @@ class Login extends React.Component {
   render() {
     return (
       <section>
-      <Button href='http://github.com/javivelasco' target='_blank' raised>
-        <GithubIcon /> Login with Github
-      </Button>
+        <Button href='http://github.com/javivelasco' target='_blank' raised>
+          <GithubIcon /> Login with Github
+        </Button>
       </section>
     )
   }
