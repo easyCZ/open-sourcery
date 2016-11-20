@@ -1,6 +1,8 @@
 import React from 'react';
 import Input from 'react-toolbox/lib/input';
 import { Button, IconButton } from 'react-toolbox/lib/button';
+import firebase from 'firebase';
+
 
 
 const GithubIcon = () => (
@@ -11,10 +13,46 @@ const GithubIcon = () => (
 
 class Login extends React.Component {
 
+  onGithubLogin() {
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCFP9yQ8dcnhOFtHTFAiS5PrAWdamn_2D4",
+      authDomain: "open-sourcery.firebaseapp.com",
+      databaseURL: "https://open-sourcery.firebaseio.com",
+      messagingSenderId: "535878790025"
+    };
+    firebase.initializeApp(config);
+
+    let provider = new firebase.auth.GithubAuthProvider(); 
+    ['repo'].forEach(scope => provider.addScope(scope));
+
+    firebase.auth().signInWithPopup(provider)
+      .then(function(result) {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log('result', result);
+        // ...
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+
+        console.log('err', error);
+        // ...
+      });
+  }
+
   render() {
     return (
       <section>
-        <Button href='http://github.com/javivelasco' target='_blank' raised>
+        <Button onClick={this.onGithubLogin} raised>
           <GithubIcon /> Login with Github
         </Button>
       </section>
