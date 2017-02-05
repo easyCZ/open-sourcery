@@ -1,7 +1,6 @@
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
   white,
-  grey500,
   black
 } from 'material-ui/styles/colors';
 
