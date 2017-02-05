@@ -15,7 +15,9 @@ dependencies:
 
 test:
   override:
-    - npm run test
+    - npm test
+  post:
+    - npm test -- --coverage --coverageDirectory=$CIRCLE_ARTIFACTS
 
 
 deployment:
