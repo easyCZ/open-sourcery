@@ -7,7 +7,6 @@ import reactImage from './logos/logo.svg';
 import twitterImage from './logos/Twitter.svg';
 import bloomberg from './logos/Bloomberg_Business.svg';
 
-console.log(ProjectCard)
 
 class App extends Component {
   render() {
