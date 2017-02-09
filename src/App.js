@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import Header from './header';
 import ProjectCard from './projects/ProjectCard';
 
-import reactImage from './logo.svg';
-import twitterImage from './Twitter.svg';
-import bloomberg from './Bloomberg_Business.svg';
+import reactImage from './logos/logo.svg';
+import twitterImage from './logos/Twitter.svg';
+import bloomberg from './logos/Bloomberg_Business.svg';
 
 console.log(ProjectCard)
 
