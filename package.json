@@ -9,7 +9,8 @@
     "normalize.css": "^5.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "semantic-ui-react": "^0.64.8"
   },
   "scripts": {
     "start": "react-scripts start",
