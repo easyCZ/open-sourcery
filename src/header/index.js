@@ -13,11 +13,15 @@ const styles = {
 }
 
 
-const Header = () => (
-  <header style={styles.container}>
-    OpenSourcery
-  </header>
-)
+const Header = (props) => {
+  console.log(props)
+  return (<div>
+    <header style={styles.container}>
+      OpenSourcery
+    </header>
+    <main>{props.children}</main>
+  </div>)
+}
 
 
 

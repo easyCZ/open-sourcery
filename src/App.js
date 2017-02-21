@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
 
 import Header from './header';
 import ProjectCard from './projects/ProjectCard';
+import IssueCard from './issues/IssueCard';
 
 import reactImage from './logos/logo.svg';
 import twitterImage from './logos/Twitter.svg';
@@ -62,8 +64,14 @@ const repos = [
   }
 ]
 
+const NotFound = () => (
+  <div>
+    <h3>404 page not found</h3>
+    <p>We are sorry but the page you are looking for does not exist.</p>
+  </div>
+)
 
-const CardExampleGroups = () => (
+const ProjectCardExampleGroups = () => (
   <Card.Group style={{ margin: '0.5em' }}>
     {repos.map(repo =>
       <ProjectCard
@@ -78,15 +86,34 @@ const CardExampleGroups = () => (
   </Card.Group>
 )
 
+const IssueCardExampleGroups = () => (
+  <Card.Group style={{ margin: '0.5em' }}>
+    {repos.map(repo =>
+      <IssueCard
+        img={repo.img}
+        name={repo.name}
+        owner={repo.owner}
+        description={repo.description}
+        stars={repo.stars}
+        language={repo.language}
+      />)
+    }
+  </Card.Group>
+)
 
 class App extends Component {
   render() {
 
     return (
-      <div>
-        <Header />
-          <CardExampleGroups />
-      </div>
+      <Router history={browserHistory}>
+        <Route path='/' component={Header}>
+          <IndexRoute component={ProjectCardExampleGroups}/>
+
+          <Route path='issues/:owner/:repo' component={IssueCardExampleGroups}/>
+
+          <Route path='*' component={NotFound}/>
+        </Route>
+      </Router>
     );
   }
 }
