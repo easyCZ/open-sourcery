@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import Header from './header';
 import ProjectCard from './projects/ProjectCard';
@@ -109,7 +109,7 @@ class App extends Component {
         <Route path='/' component={Header}>
           <IndexRoute component={ProjectCardExampleGroups}/>
 
-          <Route path='issues/:owner/:repo' component={IssueCardExampleGroups}/>
+          <Route path=':owner/:repo' component={IssueCardExampleGroups}/>
 
           <Route path='*' component={NotFound}/>
         </Route>
