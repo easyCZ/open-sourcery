@@ -35,7 +35,10 @@ class Header extends Component {
         <header style={styles.container}>
           <Link to='/' style={owner ? {color: 'rgba(0, 0, 0, 0.3)'} : {color: 'rgb(0, 0, 0)'} }>OpenSourcery</Link>
           { owner ?  (
-            <Link to={'/' + owner + '/' + repo} style={{color: 'rgb(0, 0, 0)'}}> <Icon name='chevron right'/>{owner + '/' + repo}</Link>) 
+            <Link to={`/${owner}/${repo}`} style={{color: 'rgb(0, 0, 0)'}}>
+              <Icon name='chevron right'/>
+              {owner}/{repo}
+            </Link>) 
             : null 
           }
         </header>

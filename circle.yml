@@ -23,6 +23,7 @@ deployment:
   master:
     branch: master
     commands:
+      - npm install
       - npm run build
       - npm install -g firebase-tools
       - firebase deploy --token "$FIREBASE_TOKEN"
