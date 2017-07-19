@@ -5,12 +5,22 @@ import Header from './header';
 import ProjectCard from './projects/ProjectCard';
 import IssueCard from './issues/IssueCard';
 
+import firebase from 'firebase'
+
 import reactImage from './logos/logo.svg';
 import twitterImage from './logos/Twitter.svg';
 import bloomberg from './logos/Bloomberg_Business.svg';
 
 import { Button, Card, Image } from 'semantic-ui-react'
 import { Container } from 'semantic-ui-react'
+
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCFP9yQ8dcnhOFtHTFAiS5PrAWdamn_2D4",
+  authDomain: "https://open-sourcery.firebaseio.com",
+  databaseURL: "https://open-sourcery.firebaseio.com",
+}
+
+firebase.initializeApp(FIREBASE_CONFIG);
 
 
 const repos = [
@@ -71,20 +81,41 @@ const NotFound = () => (
   </div>
 )
 
-const ProjectCardExampleGroups = () => (
-  <Card.Group style={{ margin: '0.5em' }}>
-    {repos.map(repo =>
-      <ProjectCard
-        img={repo.img}
-        name={repo.name}
-        owner={repo.owner}
-        description={repo.description}
-        stars={repo.stars}
-        language={repo.language}
-      />)
+class ProjectCardExampleGroups extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      repos: []
     }
-  </Card.Group>
-)
+  }
+
+  componentDidMount() {
+    const db = firebase.database();
+    db.ref('issues').once('value').then(snapshot => {
+      this.setState({repos: Object.values(snapshot.val())})
+      console.log('snap', snapshot.val())
+
+    })
+  }
+
+  render() {
+    return (
+      <Card.Group style={{margin: '0.5em'}}>
+        {this.state.repos.map(repo =>
+          <ProjectCard
+            img={require('./logos/missing.png')}
+            name={repo.Repo}
+            owner={repo.Owner}
+            description={repo.description}
+            stars={100}
+            language={'JavaScript'}
+          />)
+        }
+      </Card.Group>
+    )
+  }
+}
 
 const IssueCardExampleGroups = () => (
   <Card.Group style={{ margin: '0.5em' }}>
@@ -102,6 +133,7 @@ const IssueCardExampleGroups = () => (
 )
 
 class App extends Component {
+
   render() {
 
     return (
